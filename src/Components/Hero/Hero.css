@@ -20,7 +20,7 @@
 .card-img-top {
   width: 100%;
   height: 200px;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .card-body {
@@ -43,4 +43,76 @@
 
 .card-text1 {
   color: #555;
+}
+
+.cool-button {
+  position: relative;
+  top: 50%;
+  background-color: #0a0a23;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0px 0px 2px 2px rgb(0, 0, 0);
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.cool-button:hover {
+  background-color: #1d1d3f;
+  box-shadow: 0px 0px 5px 5px rgb(0, 0, 0);
+}
+
+.cool-button:active {
+  background-color: #0a0a23;
+  box-shadow: 0px 0px 2px 2px rgb(0, 0, 0);
+}
+
+/* Responsive styles for mobile screens */
+@media screen and (max-width: 767px) {
+  .card {
+    width: 100%; /* Make the cards take up the full width on mobile screens */
+  }
+
+  .card-img-top {
+    height: 150px; /* Reduce the height of the image on mobile screens */
+  }
+
+  .card-title {
+    font-size: 1.1rem; /* Reduce the font size of the title on mobile screens */
+  }
+
+  .card-text {
+    font-size: 0.9rem; /* Reduce the font size of the text on mobile screens */
+  }
+
+  .card-text1 {
+    font-size: 0.9rem; /* Reduce the font size of the text on mobile screens */
+  }
+}
+
+/* Responsive styles for tablet screens */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .card {
+    width: calc(
+      33.333% - 20px
+    ); /* Make the cards take up 1/3 of the width on tablet screens */
+  }
+
+  .card-img-top {
+    height: 200px; /* Increase the height of the image on tablet screens */
+  }
+
+  .card-title {
+    font-size: 1.25rem; /* Increase the font size of the title on tablet screens */
+  }
+
+  .card-text {
+    font-size: 1rem; /* Increase the font size of the text on tablet screens */
+  }
+
+  .card-text1 {
+    font-size: 1rem; /* Increase the font size of the text on tablet screens */
+  }
 }

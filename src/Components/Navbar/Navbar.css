@@ -51,3 +51,47 @@ nav ul li {
   text-decoration: none;
   cursor: pointer;
 }
+
+/* Responsive styles for mobile screens */
+@media screen and (max-width: 767px) {
+  nav {
+    flex-direction: column;
+    padding: 10px 0px;
+  }
+
+  .logo {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  nav ul li {
+    display: block;
+    margin: 10px 0px;
+  }
+
+  .custom-button {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+/* Responsive styles for tablet screens */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  nav {
+    padding: 10px 20px;
+  }
+
+  .logo {
+    width: 150px;
+  }
+
+  nav ul li {
+    margin: 0px 10px;
+  }
+
+  .custom-button {
+    width: auto;
+    padding: 10px 20px;
+  }
+}

@@ -31,6 +31,9 @@ const App = () => {
             <p className="card-text">Category: {product.category}</p>
             <p className="card-text1">{product.description}</p>
             <p className="card-text">Price: ${product.price}</p>
+            <Link to={`/contact/${product.id}`}>
+              <button type="button" className="cool-button ">Buy Now</button>
+            </Link>
           </div>
         </div>
       ))}

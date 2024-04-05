@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios'; // Import axios
 import './ContactStyle.css';
+import Navbar from '../Navbar/Navbar';
 
 const Contact = () => {
   const { productId } = useParams();
@@ -25,7 +26,9 @@ const Contact = () => {
   }
 
   return (
-    <div className="container">
+    <div>
+      <Navbar/>
+       <div className="container">
       <div className="product-image-column">
         <img src={product.image} alt={product.title} className="product-image" />
       </div>
@@ -34,8 +37,11 @@ const Contact = () => {
         <p>Category: {product.category}</p>
         <p className="description">{product.description}</p>
         <p>Price: ${product.price}</p>
+        
       </div>
     </div>
+    </div>
+   
   );
 }
 
