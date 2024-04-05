@@ -39,7 +39,7 @@ const App = () => {
             <Hero />
           </div>
         } />
-        <Route path='/Contact' element={<Contact/>} />
+        <Route path='/Contact/:productId' element={<Contact/>} />
       </Routes>
     </BrowserRouter>
   );
