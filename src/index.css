@@ -1,0 +1,10 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.containor {
+  padding-right: 10%;
+  padding-left: 10%;
+}
