@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios'; // Import axios
-import './ContactStyle.css';
+import axios from 'axios'; 
+import './Products.css';
 import Navbar from '../Navbar/Navbar';
 
 const Contact = () => {
