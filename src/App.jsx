@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Helmet from 'react-helmet';
@@ -8,6 +7,7 @@ import Contact from './Components/Products/products';
 import Products from './Components/Contactus/Contactus';
 import Address from './Components/Address/Address';
 import Category from './Components/Category/category';
+import Register from './Components/Register/Register';
 
 const App = () => {
   return (
@@ -27,6 +27,7 @@ const App = () => {
         <Route path='/Products' element={<Products/>} />
         <Route path='/Address' element={<Address/>} />
         <Route path='/Category/:categoryName' element={<Category/>} />
+        <Route path='/Register' element={<Register/>} />
 
 
 

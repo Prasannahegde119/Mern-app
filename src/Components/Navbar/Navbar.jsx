@@ -30,7 +30,7 @@ const Navbar = () => {
     <nav className='container'>
       <img src={logo} alt='logo' className='logo' />
       <ul>
-        <li>Home</li>
+      <li><Link to='/register'>Home</Link></li>
         <li><Link to='/'>Products</Link></li>
         {loading ? (
           <li>Loading categories...</li>
