@@ -22,7 +22,7 @@ const Navbar = () => {
   const handleCategoryChange = (event) => {
     const selectedCategory = event.target.value;
     if (selectedCategory) {
-      navigate(`/category/${selectedCategory}`); // Use navigate instead of history.push
+      navigate(`/category/${selectedCategory}`); 
     }
   };
 
