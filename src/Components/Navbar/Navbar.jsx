@@ -30,7 +30,7 @@ const Navbar = () => {
     <nav className='container'>
       <img src={logo} alt='logo' className='logo' />
       <ul>
-      <li><Link to='/register'>Home</Link></li>
+      <li><Link to='/'>Home</Link></li>
         <li><Link to='/'>Products</Link></li>
         {loading ? (
           <li>Loading categories...</li>
@@ -45,7 +45,7 @@ const Navbar = () => {
           </li>
         )}
         <li><Link to='/Address' className='custom-button'>Contact Us</Link></li>
-        <li>Home</li>
+        <li><Link to='/register'>Register</Link></li>
       </ul>
     </nav>
   );
