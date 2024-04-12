@@ -3,26 +3,34 @@
   margin: 0 auto;
   padding: 40px;
   border-radius: 10px;
-  background-color: #ffffff;
+  background-color: #f5f5dc;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .login-container h2 {
   text-align: center;
   margin-bottom: 30px;
   color: #333333;
+  font-weight: bold;
+  font-size: 2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .form-group {
   margin-bottom: 20px;
+  width: 100%;
 }
 
 .form-group input {
-  width: calc(100% - 20px);
+  width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  outline: none; /* Remove default focus outline */
+  outline: none;
+  font-size: 16px;
 }
 
 .form-group button {
@@ -30,7 +38,7 @@
   padding: 12px;
   border: none;
   border-radius: 5px;
-  background-color: #007bff;
+  background-color: #4caf50;
   color: #fff;
   font-size: 16px;
   cursor: pointer;
@@ -38,10 +46,41 @@
 }
 
 .form-group button:hover {
-  background-color: #0056b3;
+  background-color: #45a049;
 }
 
 .error-message {
+  color: #dc3545;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+/* Add some visual styles to the form inputs */
+.form-group input {
+  border-color: #ccc;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+/* Add some visual styles to the form button */
+.form-group button {
+  background-color: #4caf50;
+  border-color: #4caf50;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.form-group button:hover {
+  background-color: #45a049;
+  color: #fff;
+}
+
+/* Add some visual styles to the error message */
+.error-message {
+  font-size: 14px;
   color: #dc3545;
   margin-bottom: 10px;
 }

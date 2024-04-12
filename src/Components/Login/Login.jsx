@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
-import './login.css'; // You can create a separate CSS file for login page if needed
+import { Link } from 'react-router-dom'; 
+import './login.css'; 
 import { useNavigate } from 'react-router-dom';
 
 
