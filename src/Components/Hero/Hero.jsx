@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'; // Import Link component
+import { Link } from 'react-router-dom';
 import './Hero.css'; 
 
 const App = () => {
@@ -29,10 +29,10 @@ const App = () => {
           <div className="card-body">
             <h5 className="card-title">{product.title}</h5>
             <p className="card-text">Category: {product.category}</p>
-            <p className="card-text1">{product.description}</p>
+            <p className="card-text">{product.description.length > 60 ? product.description.substring(0, 150) + '...' : product.description}</p> {/* Display truncated description */}
             <p className="card-text">Price: ${product.price}</p>
             <Link to={`/contact/${product.id}`}>
-              <button type="button" className="cool-button ">Buy Now</button>
+              <button type="button" className="cool-button">Buy Now</button>
             </Link>
           </div>
         </div>
