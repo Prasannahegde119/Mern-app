@@ -3,7 +3,7 @@ import './Cart.css'
 const Cart = () => {
   return (
     <div>
-      <h1>HI</h1>
+      <h1>Vidhu</h1>
     </div>
   )
 }
