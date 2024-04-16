@@ -55,8 +55,8 @@ nav ul li {
 .containers {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 50px;
+  justify-content: space-around;
+  /* gap: 50px; */
 }
 
 /* Responsive styles for mobile screens */

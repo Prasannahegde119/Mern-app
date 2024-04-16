@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './Navbar.css';
 import logo from '../../assets/logo.avif';
-import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
+import { Link, useNavigate } from 'react-router-dom';
 
-const Navbar = () => {
+const CustomNavbar = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate(); // Use useNavigate hook for navigation
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch('https://fakestoreapi.com/products')
@@ -27,28 +27,47 @@ const Navbar = () => {
   };
 
   return (
-    <nav className='containers'>
-      <img src={logo} alt='logo' className='logo' />
-      <ul>
-      <li><Link to='/'>Home</Link></li>
-        <li><Link to='/'>Products</Link></li>
-        {loading ? (
-          <li>Loading categories...</li>
-        ) : (
-          <li>
-            <select onChange={handleCategoryChange}>
-              <option value="">Categories</option>
-              {categories.map((category, index) => (
-                <option key={index} value={category}>{category}</option>
-              ))}
-            </select>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark containers">
+      <Link className="navbar-brand" to="/"><img src={logo} alt='logo' className='logo' /></Link>
+      <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      <div className="collapse navbar-collapse" id="navbarNav">
+        <ul className="navbar-nav mr-auto">
+          <li className="nav-item">
+            <Link className="nav-link" to="/">Home</Link>
           </li>
-        )}
-        <li><Link to='/Address' className='custom-button'>Contact Us</Link></li>
-        <li><Link to='/register'>Register</Link></li>
-      </ul>
+          <li className="nav-item">
+            <Link className="nav-link" to="/">Products</Link>
+          </li>
+          {loading ? (
+            <li className="nav-item">
+              <span className="nav-link">Loading categories...</span>
+            </li>
+          ) : (
+            <li className="nav-item dropdown">
+              <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Categories
+              </a>
+              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                {categories.map((category, index) => (
+                  <li key={index}>
+                    <Link className="dropdown-item" to={`/category/${category}`} onClick={() => navigate(`/category/${category}`)}>{category}</Link>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          )}
+          <li className="nav-item">
+            <Link className="nav-link custom-button" to="/Address">Contact Us</Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/register">Register</Link>
+          </li>
+        </ul>
+      </div>
     </nav>
   );
 }
 
-export default Navbar;
+export default CustomNavbar;
