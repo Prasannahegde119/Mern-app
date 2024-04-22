@@ -3,9 +3,8 @@
   height: 100%;
   background-color: #333;
   transition: width 0.3s ease;
-  position: fixed;
+  position: relative;
   top: 0;
-  /* right: 0; Position on the right side */
   left: 0;
   bottom: 0;
   z-index: 1000;
@@ -50,5 +49,5 @@
 .sidebar-text {
   display: $ {
     isopen?'inline': "none";
-  } /* Hide text when closed */
+  }
 }

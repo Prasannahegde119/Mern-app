@@ -13,7 +13,7 @@ import Cart from './Components/Cart/Cart';
 import { CartProvider } from './Components/Cart/CartContext';
 import AdminHome from './Components/Admin/AdminHome';
 import AddProducts from './Components/Admin/AddProducts/AddProducts';
-
+import ProductTable from './Components/Admin/ProductTable/ProductTable';
 
 const App = () => {
   return (
@@ -42,6 +42,8 @@ const App = () => {
      <Route path='/Cart' element={<Cart/>} />
      <Route path='/AdminHome' element={<AdminHome/>} />
      <Route path='/AddProducts' element={<AddProducts/>} />
+     <Route path='/ProductTable' element={<ProductTable/>} />
+
 
 
 

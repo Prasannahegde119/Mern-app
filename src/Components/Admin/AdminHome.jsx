@@ -23,7 +23,7 @@ const AdminHome = () => {
           </a>
         </li>
         <li className="sidebar-item">
-          <a href="/profile" className="sidebar-link">
+          <a href="/ProductTable" className="sidebar-link">
             <FontAwesomeIcon icon={faUser} className="sidebar-icon" />
             {isOpen && <span className="sidebar-text">Profile</span>}
           </a>
