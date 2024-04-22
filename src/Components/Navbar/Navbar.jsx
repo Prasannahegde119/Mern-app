@@ -2,11 +2,17 @@ import React, { useState, useEffect } from 'react';
 import './Navbar.css';
 import logo from '../../assets/logo.avif';
 import { Link, useNavigate } from 'react-router-dom';
+import { CartContext } from '../Cart/CartContext';
+import { useContext } from 'react';
+// import AdminDashboard from '../Admin/AdminDashboard';
 
 const CustomNavbar = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  const {cartItems}=useContext(CartContext);
+
 
   useEffect(() => {
     fetch('https://fakestoreapi.com/products')
@@ -38,7 +44,7 @@ const CustomNavbar = () => {
             <Link className="nav-link text-dark" to="/">Home</Link> {/* Changed text-dark to apply dark color */}
           </li>
           <li className="nav-item">
-            <Link className="nav-link text-dark" to="/">Products</Link> {/* Changed text-dark to apply dark color */}
+            <Link className="nav-link text-dark" to="/AdminHome">AdminDashboard</Link> {/* Changed text-dark to apply dark color */}
           </li>
           {loading ? (
             <li className="nav-item">
@@ -68,6 +74,7 @@ const CustomNavbar = () => {
         <div className="ml-auto">
         <Link to="/cart" className="text-dark me-3">
           <i className="fa-solid fa-cart-shopping fs-4"></i> {/* fs-4 class for font size */}
+          <span className="badge bg-secondary">{cartItems.length}</span>
         </Link>
       </div>
       </div>

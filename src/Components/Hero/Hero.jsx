@@ -9,7 +9,7 @@ const App = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('https://fakestoreapi.com/products');
+        const response = await axios.get('http://localhost:5000/api/products');
         setProducts(response.data);
       } catch (error) {
         alert(error.message);
@@ -29,7 +29,9 @@ const App = () => {
           <div className="card-body">
             <h5 className="card-title">{product.title}</h5>
             <p className="card-text">Category: {product.category}</p>
-            <p className="card-text">{product.description.length > 60 ? product.description.substring(0, 150) + '...' : product.description}</p> {/* Display truncated description */}
+            {/* <p className="card-text">{product.description.length > 60 ? product.description.substring(0,60) + '...' : product.description}</p> Display truncated description */}
+            <p className="card-text">{product.description.slice(0,60)}</p> {/* Display truncated description */}
+           
             <p className="card-text">Price: ${product.price}</p>
             <Link to={`/contact/${product.id}`}>
               <button type="button" className="cool-button">Buy Now</button>
