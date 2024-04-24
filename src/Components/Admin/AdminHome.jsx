@@ -1,42 +1,63 @@
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faUser, faCog, faBars } from '@fortawesome/free-solid-svg-icons';
-import './Admin.css'; // Import custom CSS for styling
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faGauge,
+  faUser,
+  faCartShopping,
+  faSignOutAlt,
+  faPlus,
+} from "@fortawesome/free-solid-svg-icons";
+import logo from "../../assets/logo.avif"; // Import the logo image
+import { Link } from "react-router-dom";
+import "./Admin.css";
+import { useNavigate } from "react-router-dom";
 
 const AdminHome = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
+  const handlelogout = () => {
+    navigate("/");
   };
 
   return (
-    <div className={`sidebar ${isOpen ? 'open' : ''}`}>
-      <div className="sidebar-toggle" onClick={toggleSidebar}>
-        <FontAwesomeIcon icon={faBars} className="sidebar-icon" />
+    <div className="admin">
+      <div className="logo">
+        <img src={logo} alt="logo" /> {/* Use the logo variable */}
       </div>
-      <ul className="sidebar-list">
-        <li className="sidebar-item">
-          <a href="/AddProducts" className="sidebar-link">
-            <FontAwesomeIcon icon={faHome} className="sidebar-icon" />
-            {isOpen && <span className="sidebar-text">Home</span>}
-          </a>
+      <ul className="admin-menu">
+        <li>
+          <FontAwesomeIcon icon={faGauge} />
+          <Link to="/Userchart">
+            <span>Dashboard</span>
+          </Link>
         </li>
-        <li className="sidebar-item">
-          <a href="/ProductTable" className="sidebar-link">
-            <FontAwesomeIcon icon={faUser} className="sidebar-icon" />
-            {isOpen && <span className="sidebar-text">Profile</span>}
-          </a>
+        <li>
+          <FontAwesomeIcon icon={faUser} />
+          <Link to="/ProductTable">
+            <span>Users</span>
+          </Link>
         </li>
-        <li className="sidebar-item">
-          <a href="/settings" className="sidebar-link">
-            <FontAwesomeIcon icon={faCog} className="sidebar-icon" />
-            {isOpen && <span className="sidebar-text">Settings</span>}
-          </a>
+        <li>
+          <FontAwesomeIcon icon={faCartShopping} />
+          <Link to="/UserTable">
+            <span>Products</span>
+          </Link>
+        </li>
+        <li>
+          <FontAwesomeIcon icon={faPlus} />
+          <Link to="/AddProducts">
+            <span>Add</span>
+          </Link>
+        </li>
+        <li onClick={handlelogout}>
+          <FontAwesomeIcon icon={faSignOutAlt} />
+          <Link to="/AddProducts">
+            <span>Logout</span>
+          </Link>
         </li>
       </ul>
     </div>
   );
-}
+};
 
 export default AdminHome;

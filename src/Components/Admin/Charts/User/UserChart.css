@@ -1,0 +1,8 @@
+.Chart {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.charts {
+  flex: 1;
+}

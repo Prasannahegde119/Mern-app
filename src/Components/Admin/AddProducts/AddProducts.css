@@ -5,6 +5,7 @@
   border: 1px solid #ccc;
   border-radius: 10px;
   background-color: #f8f8f8;
+  flex: 1;
 }
 
 .add-products-container h2 {
@@ -43,4 +44,9 @@
 
 .add-products-form button:hover {
   background-color: #0056b3;
+}
+
+.Dashboard {
+  display: flex;
+  justify-content: flex-start;
 }

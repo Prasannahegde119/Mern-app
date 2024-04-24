@@ -1,53 +1,41 @@
-.sidebar {
-  width: 60px; /* Adjust the width as needed */
+/* Admin.css */
+.admin {
+  width: 250px;
   height: 100%;
-  background-color: #333;
-  transition: width 0.3s ease;
-  position: relative;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  z-index: 1000;
-  overflow-x: hidden; /* Hide overflow horizontally */
-}
-
-.sidebar.open {
-  width: 250px; /* Expanded width */
-}
-
-.sidebar-toggle {
+  min-height: 100vh;
+  background-color: #222;
   color: #fff;
-  cursor: pointer;
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
-.sidebar-list {
-  padding-left: 0;
+.logo {
+  padding: 20px;
+  text-align: center;
 }
 
-.sidebar-item {
+.logo img {
+  width: 100px; /* Adjust as needed */
+}
+
+.admin-menu {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.sidebar-link {
+.admin-menu li {
+  padding: 15px;
   display: flex;
   align-items: center;
-  padding: 10px;
-  color: #fff;
-  text-decoration: none;
-  transition: background-color 0.3s;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.sidebar-link:hover {
-  background-color: #555;
+.admin-menu li:hover {
+  background-color: #333;
 }
 
-.sidebar-icon {
-  margin-right: 10px;
-}
-
-.sidebar-text {
-  display: $ {
-    isopen?'inline': "none";
-  }
+.admin-menu li span {
+  margin-left: 10px;
 }

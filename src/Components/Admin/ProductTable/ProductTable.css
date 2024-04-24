@@ -29,3 +29,12 @@
 .user-table tbody tr:hover {
   background-color: #ddd;
 }
+
+.dashboard {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.Usertable {
+  flex: 1;
+}

@@ -1,18 +1,16 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; 
-import './login.css'; 
-import { useNavigate } from 'react-router-dom';
-
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import "./login.css";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    email: '',
-    password: ''
+    email: "",
+    password: "",
   });
 
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,12 +22,12 @@ const Login = () => {
 
     try {
       // Send login data to server for authentication
-      const response = await fetch('http://localhost:5000/api/login', {
-        method: 'POST',
+      const response = await fetch("http://localhost:5000/api/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
       });
 
       if (!response.ok) {
@@ -38,16 +36,26 @@ const Login = () => {
       }
 
       // Handle successful login
-      console.log('User logged in successfully');
+      console.log("User logged in successfully");
       // Clear form fields after submission
-      setFormData({ email: '', password: '' });
+      setFormData({ email: "", password: "" });
       // Clear error message
-      setErrorMessage('');
-      navigate('/');
+      setErrorMessage("");
 
+      // Check if the user is admin
+      if (
+        formData.email === "admin@gmail.com" &&
+        formData.password === "admin"
+      ) {
+        // Redirect to admin page
+        navigate("/UserChart");
+      } else {
+        // Redirect to user homepage
+        navigate("/");
+      }
     } catch (error) {
-      console.error('Error logging in:', error.message);
-      setErrorMessage('Login failed. Please check your email and password.');
+      console.error("Error logging in:", error.message);
+      setErrorMessage("Login failed. Please check your email and password.");
     }
   };
 
@@ -80,7 +88,9 @@ const Login = () => {
           <button type="submit">Login</button>
         </div>
       </form>
-      <p>Don't have an account? <Link to="/register">Register</Link></p>
+      <p>
+        Don't have an account? <Link to="/register">Register</Link>
+      </p>
     </div>
   );
 };
