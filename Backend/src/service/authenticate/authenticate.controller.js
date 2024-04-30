@@ -44,7 +44,7 @@ export class AuthenticateController {
     res.cookie("token", token);
 
     // Login successful
-    return res.status(200).json({ message: "Login successful" });
+    return res.status(200).send({ message: "Login successful", token });
   }
 
   async users(req, res) {

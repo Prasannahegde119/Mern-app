@@ -2,14 +2,23 @@ import React, { useState, useEffect } from "react";
 import "./Navbar.css";
 import logo from "../../assets/logo.avif";
 import { Link, useNavigate } from "react-router-dom";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const CustomNavbar = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
+    // Check if token exists in localStorage
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsLoggedIn(true); // Set login status to true if token exists
+    }
+
+    fetch("http://localhost:5000/api/products")
       .then((response) => response.json())
       .then((data) => {
         const categoryList = data.map((product) => product.category);
@@ -19,17 +28,17 @@ const CustomNavbar = () => {
       .catch((error) => console.error("Error fetching categories:", error));
   }, []);
 
-  const handleCategoryChange = (event) => {
-    const selectedCategory = event.target.value;
-    if (selectedCategory) {
-      navigate(`/category/${selectedCategory}`);
-    }
+  const handleLogout = () => {
+    // Remove token from localStorage
+    localStorage.removeItem("token");
+    // Change login status to false
+    setIsLoggedIn(false);
+    // Redirect to login page or any other desired page
+    navigate("/");
   };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-primary containers">
-      {" "}
-      {/* Changed bg-dark to bg-primary */}
       <Link className="navbar-brand ms-3" to="/">
         <img src={logo} alt="logo" className="logo" />
       </Link>
@@ -49,14 +58,12 @@ const CustomNavbar = () => {
           <li className="nav-item">
             <Link className="nav-link text-dark" to="/">
               Home
-            </Link>{" "}
-            {/* Changed text-dark to apply dark color */}
+            </Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link text-dark" to="/Userchart">
               AdminDashboard
-            </Link>{" "}
-            {/* Changed text-dark to apply dark color */}
+            </Link>
           </li>
           {loading ? (
             <li className="nav-item">
@@ -72,8 +79,6 @@ const CustomNavbar = () => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                {" "}
-                {/* Changed text-dark to apply dark color */}
                 Categories
               </a>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -85,8 +90,7 @@ const CustomNavbar = () => {
                       onClick={() => navigate(`/category/${category}`)}
                     >
                       {category}
-                    </Link>{" "}
-                    {/* Changed text-dark to apply dark color */}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -95,23 +99,31 @@ const CustomNavbar = () => {
           <li className="nav-item">
             <Link className="nav-link custom-button text-dark" to="/Address">
               Contact Us
-            </Link>{" "}
-            {/* Changed text-dark to apply dark color */}
+            </Link>
           </li>
-          <li className="nav-item">
-            <Link className="nav-link text-dark" to="/Login">
-              Login
-            </Link>{" "}
-            {/* Changed text-dark to apply dark color */}
+          {/* Conditional rendering based on login status */}
+          {isLoggedIn ? (
+            <li className="nav-item">
+              <button
+                className="nav-link text-dark border-0 bg-transparent"
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
+            </li>
+          ) : (
+            <li className="nav-item">
+              <Link className="nav-link text-dark" to="/Login">
+                Login
+              </Link>
+            </li>
+          )}
+          <li>
+            <Link to="/Cart">
+              <FontAwesomeIcon icon={faCartShopping} className="fs-3" />
+            </Link>
           </li>
         </ul>
-        <div className="ml-auto">
-          <Link to="/cart" className="text-dark me-3">
-            <i className="fa-solid fa-cart-shopping fs-4"></i>{" "}
-            {/* fs-4 class for font size */}
-            <span className="badge bg-secondary"></span>
-          </Link>
-        </div>
       </div>
     </nav>
   );

@@ -14,6 +14,8 @@ import AddProducts from "./Components/Admin/AddProducts/AddProducts";
 import ProductTable from "./Components/Admin/ProductTable/ProductTable";
 import UserTable from "./Components/Admin/UserTable";
 import Userchart from "./Components/Admin/Charts/User/Userchart";
+import DeliveryAddress from "./Components/Delevery/DeliveryAddress";
+import Logout from "./Components/Login/Logout";
 
 const App = () => {
   return (
@@ -40,6 +42,8 @@ const App = () => {
         <Route path="/ProductTable" element={<ProductTable />} />
         <Route path="/UserTable" element={<UserTable />} />
         <Route path="/Userchart" element={<Userchart />} />
+        <Route path="DeliveryAddress" element={<DeliveryAddress />}></Route>
+        <Route path="/Logout" element={<Logout />} />
       </Routes>
     </BrowserRouter>
   );

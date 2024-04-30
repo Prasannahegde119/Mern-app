@@ -29,7 +29,6 @@ export const authenticateRouts = [
       checkNothing,
       async (req, res) => {
         try {
-          console.log("login");
           const controller = new AuthenticateController();
           await controller.login(req.body, res);
 

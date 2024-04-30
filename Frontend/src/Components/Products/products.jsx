@@ -3,8 +3,11 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./Products.css";
 import Navbar from "../Navbar/Navbar";
+// import { Cart } from "../../../../Backend/src/server";
+import { useNavigate } from "react-router-dom";
 
 const Products = () => {
+  const navigate = useNavigate();
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
@@ -13,8 +16,7 @@ const Products = () => {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          `https://fakestoreapi.com/products/${productId}`
-          // { withCredentials: true }
+          `http://localhost:5000/api/products/${productId}`
         );
         setProduct(response.data);
       } catch (error) {
@@ -24,10 +26,36 @@ const Products = () => {
 
     fetchProduct();
   }, [productId]);
+  const handleAddToCart = async (e) => {
+    e.preventDefault();
+    try {
+      //jwt token store in localstorage
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("Please login to add to cart");
+        navigate("/login");
+      }
+      const response = await fetch("http://localhost:5000/api/cart/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          //jwt token sending to the backen
+          authorization: token,
+        },
+        body: JSON.stringify({ productId, quantity }), // Send only the id
+      });
 
-  const handleAddToCart = () => {
-    // Navigate to the Cart page with the productId and quantity as URL parameters
-    window.location.href = `/cart?productId=${productId}&quantity=${quantity}`;
+      if (!response.ok) {
+        throw new Error("Failed to add to the cart");
+      }
+      const data = await response.json();
+      // console.log("Submitted cart:", data);
+      navigate("/Cart");
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error adding item to cart:", error);
+      // Handle error
+    }
   };
 
   const increaseQuantity = () => {

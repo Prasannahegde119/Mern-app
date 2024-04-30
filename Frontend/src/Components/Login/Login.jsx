@@ -35,6 +35,9 @@ const Login = () => {
         throw new Error(errorMessage);
       }
 
+      const data = await response.json();
+
+      localStorage.setItem("token", data.token);
       // Handle successful login
       console.log("User logged in successfully");
       // Clear form fields after submission

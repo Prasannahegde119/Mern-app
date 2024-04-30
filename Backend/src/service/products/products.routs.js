@@ -9,7 +9,6 @@ export const productRouts = [
       checkNothing,
       async (req, res) => {
         try {
-          console.log(req.cookie);
           const controller = new ProductController();
           const data = await controller.products();
           return res.status(200).json(data);

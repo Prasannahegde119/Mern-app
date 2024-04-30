@@ -1,0 +1,31 @@
+.pt-2-5rem {
+  padding-top: 2.5rem;
+}
+
+.padding-left {
+  padding-left: 3rem;
+}
+
+.btn-orange {
+  background-color: orange;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.btn-orange:hover {
+  background-color: darkorange;
+}
+
+.remove-text {
+  color: red;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.remove-text:hover {
+  color: darkred;
+}
