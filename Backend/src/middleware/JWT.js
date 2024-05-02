@@ -1,6 +1,11 @@
 import JWT from "jsonwebtoken";
 
-const includeApi = ["/api/cart/add", "/api/cart"];
+const includeApi = [
+  "/api/cart/add",
+  "/api/cart",
+  "/api/addresses",
+  "/api/getaddress",
+];
 export function verifyJwt(req, res, next) {
   if (!includeApi.includes(req.path)) return next();
   checkToken(req, res, next);

@@ -71,6 +71,8 @@ const cartSchema = new Schema({
 export const Cart = model("Cart", cartSchema);
 
 const addressSchema = new mongoose.Schema({
+  id: Number,
+  userId: String,
   name: String,
   phoneNumber: String,
   pincode: String,
@@ -78,7 +80,6 @@ const addressSchema = new mongoose.Schema({
   address: String,
   city: String,
   country: String,
-  userId: mongoose.Schema.Types.ObjectId,
 });
 
 // Create a model based on the schema
@@ -267,19 +268,12 @@ app.delete("/api/cart/remove/:productId", async (req, res) => {
 // Route to handle POST requests for storing address details
 app.post("/api/addresses", async (req, res) => {
   try {
-    const {
-      name,
-      phoneNumber,
-      pincode,
-      locality,
-      address,
-      city,
-      country,
-      userId,
-    } = req.body;
+    const { name, phoneNumber, pincode, locality, address, city, country } =
+      req.body;
 
     // Create a new address instance
     const newAddress = new Address({
+      userId: req.userId,
       name,
       phoneNumber,
       pincode,
@@ -287,7 +281,6 @@ app.post("/api/addresses", async (req, res) => {
       address,
       city,
       country,
-      userId: mongoose.Types.ObjectId(userId), // Convert user ID to ObjectId
     });
 
     // Save the new address to the database
@@ -299,6 +292,28 @@ app.post("/api/addresses", async (req, res) => {
       .json({ message: "Address added successfully", address: newAddress });
   } catch (error) {
     console.error("Error adding address:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+app.get("/api/getaddress", async (req, res) => {
+  try {
+    const userId = req.userId;
+
+    // Query the database for addresses associated with the provided user ID
+    const addresses = await Address.find({ userId });
+
+    // Check if addresses were found
+    if (addresses.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No addresses found for the user ID" });
+    }
+
+    // Return the list of addresses as a response
+    res.status(200).json({ addresses });
+  } catch (error) {
+    console.error("Error retrieving addresses:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 });

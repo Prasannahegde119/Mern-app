@@ -29,19 +29,54 @@
 .deliver-here-button {
   display: flex;
   justify-content: flex-end;
+  height: 50px; /* Adjust the height as needed */
+  width: 150px; /* Adjust the width as needed */
+  margin-top: 10px; /* Add some top margin for spacing */
 }
 
 .deliver-here-button button {
-  background-color: #5cb85c;
-  color: #fff;
+  background-color: orange;
+  color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 3px 14px;
   border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  text-transform: uppercase;
+  font-weight: bold;
+  height: 100%; /* Fill the height of the container */
+  width: 100%; /* Fill the width of the container */
 }
 
 .deliver-here-button button:hover {
   background-color: #4cae4c;
+}
+
+/* Custom styling for radio buttons */
+.form-check-input[type="radio"] {
+  width: 1.2em;
+  height: 1.2em;
+  position: relative;
+  top: 2px; /* Adjust the position as needed */
+  border: 1px solid #000; /* Add border */
+  border-radius: 50%; /* Make it circular */
+  appearance: none; /* Remove default styling */
+  outline: none; /* Remove outline */
+  cursor: pointer;
+}
+
+/* Style for checked radio buttons */
+.form-check-input[type="radio"]:checked::before {
+  content: "\2022"; /* Bullet character */
+  display: block;
+  width: 1em;
+  height: 1em;
+  font-size: 1.5em; /* Adjust size as needed */
+  line-height: 1em;
+  text-align: center;
+  background-color: #000; /* Color for checked radio button */
+  border-radius: 50%; /* Make it circular */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff; /* Text color */
 }

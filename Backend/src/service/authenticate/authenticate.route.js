@@ -31,10 +31,6 @@ export const authenticateRouts = [
         try {
           const controller = new AuthenticateController();
           await controller.login(req.body, res);
-
-          // return res
-          //   .status(201)
-          //   .json({ message: "User logged in successfully" });
         } catch (error) {
           console.error("Error registering user:", error);
           return res.status(500).json({ message: "Internal server error" });
@@ -53,9 +49,6 @@ export const authenticateRouts = [
           const data = await controller.users(req.body, res);
 
           return res.status(200).json(data);
-          // return res
-          //   .status(201)
-          //   .json({ message: "User logged in successfully" });
         } catch (error) {
           console.error("Error fetching users:", error);
           return res.status(500).json({ message: "Internal server error" });

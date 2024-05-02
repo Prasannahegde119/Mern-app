@@ -4,12 +4,14 @@ import logo from "../../assets/logo.avif";
 import { Link, useNavigate } from "react-router-dom";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useCart } from "../Contexts/CartContext";
 
 const CustomNavbar = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
   const navigate = useNavigate();
+  const { totalItems } = useCart();
 
   useEffect(() => {
     // Check if token exists in localStorage
@@ -121,6 +123,11 @@ const CustomNavbar = () => {
           <li>
             <Link to="/Cart">
               <FontAwesomeIcon icon={faCartShopping} className="fs-3" />
+              {totalItems > 0 && (
+                <span className="badge bg-danger rounded-pill">
+                  {totalItems}
+                </span>
+              )}
             </Link>
           </li>
         </ul>
