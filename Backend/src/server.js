@@ -233,6 +233,8 @@ app.get("/api/cart", async (req, res) => {
     // Fetch all cart items from the database
     const cartItems = await Cart.find({ userId });
 
+    // const itemCount = cartItems.length;
+
     // Respond with cart items
     res.status(200).json(cartItems);
   } catch (error) {
@@ -241,6 +243,7 @@ app.get("/api/cart", async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
 app.delete("/api/cart/remove/:productId", async (req, res) => {
   try {
     const { productId } = req.params;

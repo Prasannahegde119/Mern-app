@@ -26,7 +26,7 @@ const InvoiceGenerator = () => {
       `$${product.price}`,
       product.quantity,
       `$${product.price * product.quantity}`,
-      alert("invoice downloaded"),
+      // alert("invoice downloaded"),
       navigate("/"),
     ]);
 

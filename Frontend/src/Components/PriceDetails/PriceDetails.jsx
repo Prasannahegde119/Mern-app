@@ -6,10 +6,6 @@ const PriceDetails = () => {
   const navigate = useNavigate();
   const { totalPrice, totalItems, cartProducts } = useCart();
 
-  // const handlePlaceOrder = () => {
-  //   navigate("/DeliveryAddress");
-  // };
-
   return (
     <div className="d-flex flex-column">
       <h4>Price Details</h4>

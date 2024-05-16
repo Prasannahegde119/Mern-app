@@ -1,25 +1,59 @@
 import React, { useState, useEffect } from "react";
 import "./Navbar.css";
-import logo from "../../assets/logo.avif";
+import logo from "../../assets/logo1.avif";
 import { Link, useNavigate } from "react-router-dom";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useCart } from "../Contexts/CartContext";
+import axios from "axios"; // Import axios
 
 const CustomNavbar = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
   const navigate = useNavigate();
-  const { totalItems } = useCart();
+  const { totalItems, setCartProducts } = useCart(); // Destructure setCartProducts from useCart
 
   useEffect(() => {
     // Check if token exists in localStorage
     const token = localStorage.getItem("token");
     if (token) {
       setIsLoggedIn(true); // Set login status to true if token exists
+
+      // Fetch cart products when logged in
+      const fetchCartProducts = async () => {
+        try {
+          const cartResponse = await axios.get(
+            "http://localhost:5000/api/cart",
+            {
+              headers: {
+                "Content-Type": "application/json",
+                authorization: token,
+              },
+            }
+          );
+          const productIds = cartResponse.data.map((item) => item.productId);
+
+          const productDetailsPromises = productIds.map((productId) =>
+            axios.get(`http://localhost:5000/api/products/${productId}`)
+          );
+
+          const productResponses = await Promise.all(productDetailsPromises);
+          const products = productResponses.map((response, index) => ({
+            ...response.data,
+            quantity: cartResponse.data[index].quantity,
+          }));
+
+          setCartProducts(products);
+        } catch (error) {
+          console.error("Error fetching cart products:", error);
+        }
+      };
+
+      fetchCartProducts();
     }
 
+    // Fetch categories
     fetch("http://localhost:5000/api/products")
       .then((response) => response.json())
       .then((data) => {
@@ -123,7 +157,7 @@ const CustomNavbar = () => {
           <li>
             <Link to="/Cart">
               <FontAwesomeIcon icon={faCartShopping} className="fs-3" />
-              {totalItems > 0 && (
+              {isLoggedIn && totalItems > 0 && (
                 <span className="badge bg-danger rounded-pill">
                   {totalItems}
                 </span>
