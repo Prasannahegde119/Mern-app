@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
-import './register.css';
+import React, { useState } from "react";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import "./register.css";
 
 const Register = () => {
   const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
 
-  const [errorMessage, setErrorMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,12 +28,12 @@ const Register = () => {
 
     try {
       // Send registration data to server
-      const response = await fetch('http://localhost:5000/api/register', {
-        method: 'POST',
+      const response = await fetch("http://localhost:5000/api/register", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
       });
 
       if (!response.ok) {
@@ -42,15 +42,20 @@ const Register = () => {
       }
 
       // Handle successful registration
-      console.log('User registered successfully');
-      setSuccessMessage('Registration successful!');
+      console.log("User registered successfully");
+      setSuccessMessage("Registration successful!");
       // Reset form fields after submission
-      setFormData({ username: '', email: '', password: '', confirmPassword: '' });
+      setFormData({
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
       // Clear error message
-      setErrorMessage('');
+      setErrorMessage("");
     } catch (error) {
-      console.error('Error registering user:', error.message);
-      setErrorMessage('Registration failed. Please try again.');
+      console.error("Error registering user:", error.message);
+      setErrorMessage("Registration failed. Please try again.");
     }
   };
 
@@ -104,7 +109,9 @@ const Register = () => {
           <button type="submit">Register</button>
         </div>
       </form>
-      <p>Already have an account? <Link to="/Login">Login</Link></p>
+      <p>
+        Already have an account? <Link to="/Login">Login</Link>
+      </p>
     </div>
   );
 };

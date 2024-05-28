@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./login.css";
 import { useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import icons
+import "./login.css";
 
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
@@ -38,6 +39,7 @@ const Login = () => {
       const data = await response.json();
 
       localStorage.setItem("token", data.token);
+      localStorage.setItem("username", data.name);
       // Handle successful login
       console.log("User logged in successfully");
       // Clear form fields after submission
@@ -62,6 +64,10 @@ const Login = () => {
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+
   return (
     <div className="login-container">
       <h2>Login Form</h2>
@@ -76,15 +82,18 @@ const Login = () => {
             required
           />
         </div>
-        <div className="form-group">
+        <div className="form-group password-container">
           <input
-            type="password"
+            type={passwordVisible ? "text" : "password"}
             name="password"
             value={formData.password}
             onChange={handleChange}
             placeholder="Password"
             required
           />
+          <span onClick={togglePasswordVisibility} className="password-icon">
+            {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+          </span>
         </div>
         {errorMessage && <p className="error-message">{errorMessage}</p>}
         <div className="form-group">

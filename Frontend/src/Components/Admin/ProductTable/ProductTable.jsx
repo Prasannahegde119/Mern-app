@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FaEdit, FaTrash } from "react-icons/fa"; // Import icons from Font Awesome
 import "./ProductTable.css"; // Import custom CSS for stylingg
-import AdminHome from "../AdminHome";
+// import AdminHome from "../AdminHome";
 
 const ProductTable = () => {
   const [users, setUsers] = useState([]);
@@ -14,6 +14,7 @@ const ProductTable = () => {
       try {
         const response = await axios.get("http://localhost:5000/api/users");
         setUsers(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
@@ -72,9 +73,7 @@ const ProductTable = () => {
   return (
     <>
       <div className="dashboard">
-        <div className="adminhome">
-          <AdminHome />
-        </div>
+        <div className="adminhome">{/* <AdminHome /> */}</div>
         <div className="Usertable">
           <div className="user-table-container">
             <h2>Users</h2>

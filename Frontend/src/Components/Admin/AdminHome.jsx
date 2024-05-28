@@ -4,20 +4,19 @@ import {
   faGauge,
   faUser,
   faCartShopping,
-  faSignOutAlt,
+  // faSignOutAlt,
   faPlus,
+  faTruckArrowRight,
 } from "@fortawesome/free-solid-svg-icons";
 import logo from "../../assets/logo.avif"; // Import the logo image
 import { Link } from "react-router-dom";
 import "./Admin.css";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const AdminHome = () => {
-  const navigate = useNavigate();
-
-  const handlelogout = () => {
-    navigate("/");
-  };
+  // const handlelogout = () => {
+  //   navigate("/");
+  // };
 
   return (
     <div className="admin">
@@ -44,17 +43,23 @@ const AdminHome = () => {
           </Link>
         </li>
         <li>
+          <FontAwesomeIcon icon={faTruckArrowRight} />
+          <Link to="/OrderDetails">
+            <span>Orders</span>
+          </Link>
+        </li>
+        <li>
           <FontAwesomeIcon icon={faPlus} />
           <Link to="/AddProducts">
             <span>Add</span>
           </Link>
         </li>
-        <li onClick={handlelogout}>
+        {/* <li onClick={handlelogout} className="logout">
           <FontAwesomeIcon icon={faSignOutAlt} />
           <Link to="/AddProducts">
             <span>Logout</span>
           </Link>
-        </li>
+        </li> */}
       </ul>
     </div>
   );

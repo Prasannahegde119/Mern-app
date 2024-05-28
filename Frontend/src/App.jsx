@@ -16,7 +16,10 @@ import UserTable from "./Components/Admin/UserTable";
 import Userchart from "./Components/Admin/Charts/User/Userchart";
 import DeliveryAddress from "./Components/Delevery/DeliveryAddress";
 import InvoiceGenerator from "./Components/Delevery/InvoiceGenerator";
-
+import OrderList from "./Components/OrderedDetails/OrderList";
+import SingleOrder from "./Components/Admin/OrderDetails/SingleOrder";
+import Layout from "./Components/Admin/Layout/Layout";
+import OrderDetails from "./Components/Admin/OrderDetails/OrderDetails";
 const App = () => {
   return (
     <BrowserRouter>
@@ -24,10 +27,10 @@ const App = () => {
         <Route
           path="/"
           element={
-            <div>
+            <>
               <Navbar />
               <Hero />
-            </div>
+            </>
           }
         />
         <Route path="/Contact/:productId" element={<Contact />} />
@@ -38,12 +41,19 @@ const App = () => {
         <Route path="/Login" element={<Login />} />
         <Route path="/Cart" element={<Cart />} />
         <Route path="/AdminHome" element={<AdminHome />} />
-        <Route path="/AddProducts" element={<AddProducts />} />
-        <Route path="/ProductTable" element={<ProductTable />} />
-        <Route path="/UserTable" element={<UserTable />} />
-        <Route path="/Userchart" element={<Userchart />} />
-        <Route path="DeliveryAddress" element={<DeliveryAddress />}></Route>
-        <Route path="InvoiceGenerator" element={<InvoiceGenerator />}></Route>
+        <Route path="/DeliveryAddress" element={<DeliveryAddress />} />
+        <Route path="/InvoiceGenerator" element={<InvoiceGenerator />} />
+        <Route path="/OrderList" element={<OrderList />} />
+
+        {/* Apply Layout to specific admin-related routes */}
+        <Route element={<Layout />}>
+          <Route path="/AddProducts" element={<AddProducts />} />
+          <Route path="/Userchart" element={<Userchart />} />
+          <Route path="/SingleOrder/:orderId" element={<SingleOrder />} />
+          <Route path="/ProductTable" element={<ProductTable />} />
+          <Route path="/UserTable" element={<UserTable />} />
+          <Route path="/OrderDetails" element={<OrderDetails />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

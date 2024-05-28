@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./Products.css";
 import Navbar from "../Navbar/Navbar";
-// import { Cart } from "../../../../Backend/src/server";
 import { useNavigate } from "react-router-dom";
 
 const Products = () => {

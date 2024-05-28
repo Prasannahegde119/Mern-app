@@ -5,8 +5,11 @@ import PriceDetails from "../PriceDetails/PriceDetails";
 import axios from "axios";
 import "./Delivery.css";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../Contexts/CartContext";
 
 function DeliveryAddress() {
+  const { cartProducts, totalPrice } = useCart();
+
   const [addresses, setAddresses] = useState([]);
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [showNewAddressForm, setShowNewAddressForm] = useState(false);
@@ -45,17 +48,40 @@ function DeliveryAddress() {
   useEffect(() => {
     fetchAddresses();
   }, []);
-
-  const handleDelivery = () => {
-    if (selectedAddress) {
-      console.log("Delivering to:", selectedAddress.address);
+  const handleDelivery = async () => {
+    if (selectedAddress && cartProducts.length > 0) {
+      try {
+        const token = localStorage.getItem("token");
+        // Extracting only the product IDs from the cartProducts array
+        const productIds = cartProducts.map((product) => product.id);
+        const orderData = {
+          address: selectedAddress,
+          cartItems: productIds, // Sending only the product IDs
+          totalPrice: totalPrice,
+        };
+        const response = await axios.post(
+          "http://localhost:5000/api/orders",
+          orderData,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: token,
+            },
+          }
+        );
+        if (response.status === 201) {
+          console.log("Order placed successfully");
+          console.log(orderData);
+          navigate("/InvoiceGenerator");
+        } else {
+          console.error("Failed to place order");
+        }
+      } catch (error) {
+        console.error("Error placing order:", error);
+      }
     } else {
-      console.log("Please select an address first.");
+      console.log("Please select an address and add items to the cart first.");
     }
-    // Redirect to payment page
-    navigate("/InvoiceGenerator", {
-      state: { selectedAddress: selectedAddress.address },
-    });
   };
 
   const handleNewAddressClick = () => {

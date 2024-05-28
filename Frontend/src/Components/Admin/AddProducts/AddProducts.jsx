@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./AddProducts.css";
-import AdminHome from "../AdminHome";
 
 const AddProducts = () => {
   const [product, setProduct] = useState({
@@ -61,9 +60,7 @@ const AddProducts = () => {
 
   return (
     <div className="Dashboard">
-      <div>
-        <AdminHome />
-      </div>
+      <div>{/* <AdminHome /> */}</div>
       <div className="add-products-container">
         <h2>Add New Product</h2>
         <form onSubmit={handleSubmit} className="add-products-form">

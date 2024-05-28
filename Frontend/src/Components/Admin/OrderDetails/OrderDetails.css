@@ -1,0 +1,96 @@
+.order-details {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.order-details h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.order-details table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.order-details th,
+.order-details td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.order-details th {
+  background-color: #f8f8f8;
+  font-weight: bold;
+}
+
+.order-details tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.order-details tr:hover {
+  background-color: #f1f1f1;
+}
+
+.order-details tr:first-child th {
+  border-top: none; /* Ensure no double border at the top */
+}
+
+.order-details tr:last-child td {
+  border-bottom: none; /* Ensure no double border at the bottom */
+}
+
+.Link {
+  color: blue; /* Set link color */
+  text-decoration: underline; /* Underline link text */
+  cursor: pointer; /* Show pointer cursor on hover */
+}
+
+.Link:hover {
+  color: darkblue; /* Change color on hover */
+}
+
+.filter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filter label {
+  font-size: 16px;
+  color: #333;
+  margin-right: 10px;
+}
+
+.filter-select {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #333;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.filter-icon {
+  color: #007bff;
+  font-size: 20px;
+  margin-left: 10px;
+}

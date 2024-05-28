@@ -9,7 +9,7 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   border: 2px solid #ddd; /* Add border to the cards */
-
+  margin: 7px 0px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 

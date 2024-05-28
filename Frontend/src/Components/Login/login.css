@@ -1,9 +1,13 @@
+body {
+  background-color: #f0f0f0; /* Light gray background for the entire page */
+}
+
 .login-container {
   width: 400px;
   margin: 0 auto;
   padding: 40px;
   border-radius: 10px;
-  background-color: #f5f5dc;
+  background-color: #fff; /* White background for the login container */
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
@@ -13,7 +17,7 @@
 .login-container h2 {
   text-align: center;
   margin-bottom: 30px;
-  color: #333333;
+  color: #3498db; /* Blue color for the heading */
   font-weight: bold;
   font-size: 2rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
@@ -31,6 +35,13 @@
   border-radius: 5px;
   outline: none;
   font-size: 16px;
+  background-color: #f7f7f7; /* Light gray background for the input fields */
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+  border-color: #3498db; /* Blue color for the input fields on focus */
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
 }
 
 .form-group button {
@@ -38,7 +49,7 @@
   padding: 12px;
   border: none;
   border-radius: 5px;
-  background-color: #4caf50;
+  background-color: #f1c40f; /* Orange color for the button */
   color: #fff;
   font-size: 16px;
   cursor: pointer;
@@ -46,41 +57,45 @@
 }
 
 .form-group button:hover {
-  background-color: #45a049;
+  background-color: #e67e73; /* Dark orange color for the button on hover */
 }
 
 .error-message {
-  color: #dc3545;
+  color: #e74c3c; /* Red color for the error message */
   margin-bottom: 10px;
   font-size: 14px;
 }
 
-/* Add some visual styles to the form inputs */
-.form-group input {
-  border-color: #ccc;
-  transition: border-color 0.3s;
+/* Add a gradient background to the central part of the page */
+.central-part {
+  background-image: linear-gradient(to bottom, #f7f7f7, #e5e5e5);
+  background-size: 100% 300px;
+  background-position: 0% 100%;
+  height: 300px;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
 }
 
-.form-group input:focus {
-  border-color: #4caf50;
-  box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+/* Password visibility toggle icon */
+.password-container {
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
-/* Add some visual styles to the form button */
-.form-group button {
-  background-color: #4caf50;
-  border-color: #4caf50;
-  transition: background-color 0.3s, color 0.3s;
+.password-container input {
+  flex: 1;
+  padding-right: 40px; /* Add space for the icon */
 }
 
-.form-group button:hover {
-  background-color: #45a049;
-  color: #fff;
-}
-
-/* Add some visual styles to the error message */
-.error-message {
-  font-size: 14px;
-  color: #dc3545;
-  margin-bottom: 10px;
+.password-icon {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  color: #666;
+  font-size: 1.2rem; /* Adjust icon size if needed */
 }

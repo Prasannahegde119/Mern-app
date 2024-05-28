@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./UserTable.css"; // Import custom CSS for styling
-import AdminHome from "./AdminHome";
+// import AdminHome from "./AdminHome";
 import { FaTrash } from "react-icons/fa";
+import Pagination from "react-bootstrap/Pagination";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -19,6 +22,7 @@ const ProductList = () => {
 
     fetchProducts();
   }, []);
+
   const handleRemove = async (productId) => {
     try {
       await axios.delete(`http://localhost:5000/api/products/${productId}`);
@@ -30,28 +34,37 @@ const ProductList = () => {
       console.log("Error removing product:", error);
     }
   };
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentProducts = products.slice(indexOfFirstItem, indexOfLastItem);
+
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(products.length / itemsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+
   return (
     <div className="Dashboard">
-      <div>
-        <AdminHome />
-      </div>
+      <div>{/* <AdminHome /> */}</div>
 
       <div className="product-list-container">
         <h2>Product List</h2>
         <table className="product-table">
           <thead>
             <tr>
-              <th>ID</th>
+              <th>Sno</th>
               <th>Title</th>
               <th>Price</th>
               <th>Category</th>
               <th>Image</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            {products.map((product, i) => (
+            {currentProducts.map((product, i) => (
               <tr key={i}>
-                <td>{i + 1}</td>
+                <td>{indexOfFirstItem + i + 1}</td>
                 <td>{product.title}</td>
                 <td>${product.price}</td>
                 <td>{product.category}</td>
@@ -69,6 +82,32 @@ const ProductList = () => {
             ))}
           </tbody>
         </table>
+
+        <Pagination>
+          <Pagination.First onClick={() => setCurrentPage(1)} />
+          <Pagination.Prev
+            onClick={() =>
+              setCurrentPage((prev) => (prev > 1 ? prev - 1 : prev))
+            }
+          />
+          {pageNumbers.map((number) => (
+            <Pagination.Item
+              key={number}
+              active={number === currentPage}
+              onClick={() => setCurrentPage(number)}
+            >
+              {number}
+            </Pagination.Item>
+          ))}
+          <Pagination.Next
+            onClick={() =>
+              setCurrentPage((prev) =>
+                prev < pageNumbers.length ? prev + 1 : prev
+              )
+            }
+          />
+          <Pagination.Last onClick={() => setCurrentPage(pageNumbers.length)} />
+        </Pagination>
       </div>
     </div>
   );

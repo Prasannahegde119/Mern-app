@@ -23,7 +23,6 @@ export class AuthenticateController {
     });
     await newUser.save();
   }
-
   async login(req, res) {
     const { email, password } = req;
     // Check if the user exists with the provided email
@@ -41,10 +40,12 @@ export class AuthenticateController {
     const token = JWT.sign({ userId: user.id }, secretKey, {
       expiresIn: "1hr",
     });
-    res.cookie("token", token);
 
-    // Login successful
-    return res.status(200).send({ message: "Login successful", token });
+    // Include user's name in the response data
+    res.cookie("token", token);
+    return res
+      .status(200)
+      .send({ message: "Login successful", token, name: user.username });
   }
 
   async users(req, res) {

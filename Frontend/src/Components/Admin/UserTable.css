@@ -36,3 +36,7 @@
   display: flex;
   justify-content: flex-start;
 }
+
+.logout {
+  margin-top: 150px;
+}

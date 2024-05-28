@@ -4,14 +4,12 @@ import { config } from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-// import cookieParser from "cookie-parser";
 import { verifyJwt } from "./middleware/JWT.js";
 
 config();
 const app = express();
 const PORT = process.env.PORT || 5000;
-// app.use(cookieParser());
-// Middleware
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -84,6 +82,29 @@ const addressSchema = new mongoose.Schema({
 
 // Create a model based on the schema
 const Address = mongoose.model("Address", addressSchema);
+
+// Define a schema for the order model
+const orderSchema = new Schema(
+  {
+    userId: String, // User ID
+    address: {
+      // Address details
+      name: String,
+      phoneNumber: String,
+      pincode: String,
+      locality: String,
+      address: String,
+      city: String,
+      country: String,
+    },
+    products: [String], // Array of products
+    totalPrice: Number, // Total price of the order
+  },
+  { timestamps: true }
+); // Enable timestamps
+
+// Create a model based on the schema
+const Order = model("Order", orderSchema);
 
 applyRouts(routs, app);
 
@@ -229,11 +250,8 @@ app.post("/api/cart/add", async (req, res) => {
 app.get("/api/cart", async (req, res) => {
   try {
     const userId = req.userId;
-    // console.log(userId);
     // Fetch all cart items from the database
     const cartItems = await Cart.find({ userId });
-
-    // const itemCount = cartItems.length;
 
     // Respond with cart items
     res.status(200).json(cartItems);
@@ -317,6 +335,60 @@ app.get("/api/getaddress", async (req, res) => {
     res.status(200).json({ addresses });
   } catch (error) {
     console.error("Error retrieving addresses:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+// Route to handle POST requests for storing order details
+app.post("/api/orders", async (req, res) => {
+  try {
+    const { address, cartItems, totalPrice } = req.body;
+
+    // Create a new order instance with product IDs
+    const newOrder = new Order({
+      userId: req.userId, // Assuming you have userId available in the request
+      address,
+      products: cartItems, // Use the cartItems array directly
+      totalPrice,
+    });
+
+    // Save the new order to the database
+    await newOrder.save();
+
+    // Respond with a success message and the newly created order
+    res
+      .status(201)
+      .json({ message: "Order placed successfully", order: newOrder });
+  } catch (error) {
+    console.error("Error placing order:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+app.get("/api/getorder", async (req, res) => {
+  try {
+    // Fetch orders for the user from the database based on userId
+    const userId = req.userId;
+    const orders = await Order.find({ userId });
+
+    // Respond with the orders
+    res.status(200).json(orders);
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+//api for getting all orderdetails
+app.get("/api/getallorders", async (req, res) => {
+  try {
+    // Fetch all orders from the database
+    const orders = await Order.find();
+
+    // Respond with the orders
+    res.status(200).json(orders);
+  } catch (error) {
+    console.error("Error fetching orders:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 });
